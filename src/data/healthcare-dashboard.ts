@@ -102,6 +102,183 @@ const rawData: HospitalSummary[] = [
   { facilityId: "030110", facilityName: "Chandler Regional Medical Center", city: "Chandler", state: "AZ", edWaitTime: 210, transferWaitTime: 80, leftBeforeSeen: 1.9, ctResultsTimely: 83.7 },
 ];
 
+// Monthly state-level trend data (Jan-Dec 2024)
+export interface MonthlyStateMetric {
+  month: string;
+  state: string;
+  avgEdWaitTime: number;
+  avgTransferTime: number;
+  avgLeftBeforeSeen: number;
+}
+
+export interface NationalAverages {
+  edWaitTime: number;
+  transferTime: number;
+  leftBeforeSeen: number;
+}
+
+const nationalAverages: NationalAverages = {
+  edWaitTime: 170,
+  transferTime: 85,
+  leftBeforeSeen: 2.6,
+};
+
+const monthlyData: MonthlyStateMetric[] = [
+  // AZ - consistently below national avg
+  { month: "Jan", state: "AZ", avgEdWaitTime: 218, avgTransferTime: 82, avgLeftBeforeSeen: 2.0 },
+  { month: "Feb", state: "AZ", avgEdWaitTime: 215, avgTransferTime: 80, avgLeftBeforeSeen: 1.9 },
+  { month: "Mar", state: "AZ", avgEdWaitTime: 220, avgTransferTime: 83, avgLeftBeforeSeen: 2.1 },
+  { month: "Apr", state: "AZ", avgEdWaitTime: 225, avgTransferTime: 85, avgLeftBeforeSeen: 2.2 },
+  { month: "May", state: "AZ", avgEdWaitTime: 222, avgTransferTime: 84, avgLeftBeforeSeen: 2.1 },
+  { month: "Jun", state: "AZ", avgEdWaitTime: 230, avgTransferTime: 87, avgLeftBeforeSeen: 2.3 },
+  { month: "Jul", state: "AZ", avgEdWaitTime: 235, avgTransferTime: 89, avgLeftBeforeSeen: 2.4 },
+  { month: "Aug", state: "AZ", avgEdWaitTime: 232, avgTransferTime: 88, avgLeftBeforeSeen: 2.3 },
+  { month: "Sep", state: "AZ", avgEdWaitTime: 228, avgTransferTime: 86, avgLeftBeforeSeen: 2.2 },
+  { month: "Oct", state: "AZ", avgEdWaitTime: 224, avgTransferTime: 84, avgLeftBeforeSeen: 2.1 },
+  { month: "Nov", state: "AZ", avgEdWaitTime: 220, avgTransferTime: 82, avgLeftBeforeSeen: 2.0 },
+  { month: "Dec", state: "AZ", avgEdWaitTime: 228, avgTransferTime: 86, avgLeftBeforeSeen: 2.2 },
+
+  // CA - near avg, slight summer spike
+  { month: "Jan", state: "CA", avgEdWaitTime: 248, avgTransferTime: 94, avgLeftBeforeSeen: 3.0 },
+  { month: "Feb", state: "CA", avgEdWaitTime: 245, avgTransferTime: 92, avgLeftBeforeSeen: 2.9 },
+  { month: "Mar", state: "CA", avgEdWaitTime: 250, avgTransferTime: 95, avgLeftBeforeSeen: 3.1 },
+  { month: "Apr", state: "CA", avgEdWaitTime: 255, avgTransferTime: 97, avgLeftBeforeSeen: 3.2 },
+  { month: "May", state: "CA", avgEdWaitTime: 260, avgTransferTime: 99, avgLeftBeforeSeen: 3.3 },
+  { month: "Jun", state: "CA", avgEdWaitTime: 268, avgTransferTime: 102, avgLeftBeforeSeen: 3.5 },
+  { month: "Jul", state: "CA", avgEdWaitTime: 272, avgTransferTime: 104, avgLeftBeforeSeen: 3.6 },
+  { month: "Aug", state: "CA", avgEdWaitTime: 265, avgTransferTime: 100, avgLeftBeforeSeen: 3.4 },
+  { month: "Sep", state: "CA", avgEdWaitTime: 258, avgTransferTime: 97, avgLeftBeforeSeen: 3.2 },
+  { month: "Oct", state: "CA", avgEdWaitTime: 252, avgTransferTime: 95, avgLeftBeforeSeen: 3.1 },
+  { month: "Nov", state: "CA", avgEdWaitTime: 250, avgTransferTime: 94, avgLeftBeforeSeen: 3.0 },
+  { month: "Dec", state: "CA", avgEdWaitTime: 255, avgTransferTime: 96, avgLeftBeforeSeen: 3.2 },
+
+  // FL - winter spike from seasonal population
+  { month: "Jan", state: "FL", avgEdWaitTime: 275, avgTransferTime: 108, avgLeftBeforeSeen: 3.6 },
+  { month: "Feb", state: "FL", avgEdWaitTime: 280, avgTransferTime: 110, avgLeftBeforeSeen: 3.8 },
+  { month: "Mar", state: "FL", avgEdWaitTime: 272, avgTransferTime: 106, avgLeftBeforeSeen: 3.5 },
+  { month: "Apr", state: "FL", avgEdWaitTime: 255, avgTransferTime: 98, avgLeftBeforeSeen: 3.0 },
+  { month: "May", state: "FL", avgEdWaitTime: 248, avgTransferTime: 95, avgLeftBeforeSeen: 2.8 },
+  { month: "Jun", state: "FL", avgEdWaitTime: 242, avgTransferTime: 92, avgLeftBeforeSeen: 2.6 },
+  { month: "Jul", state: "FL", avgEdWaitTime: 245, avgTransferTime: 93, avgLeftBeforeSeen: 2.7 },
+  { month: "Aug", state: "FL", avgEdWaitTime: 248, avgTransferTime: 95, avgLeftBeforeSeen: 2.8 },
+  { month: "Sep", state: "FL", avgEdWaitTime: 252, avgTransferTime: 97, avgLeftBeforeSeen: 2.9 },
+  { month: "Oct", state: "FL", avgEdWaitTime: 258, avgTransferTime: 100, avgLeftBeforeSeen: 3.1 },
+  { month: "Nov", state: "FL", avgEdWaitTime: 268, avgTransferTime: 105, avgLeftBeforeSeen: 3.4 },
+  { month: "Dec", state: "FL", avgEdWaitTime: 278, avgTransferTime: 109, avgLeftBeforeSeen: 3.7 },
+
+  // GA - moderate, steady
+  { month: "Jan", state: "GA", avgEdWaitTime: 265, avgTransferTime: 105, avgLeftBeforeSeen: 3.3 },
+  { month: "Feb", state: "GA", avgEdWaitTime: 262, avgTransferTime: 103, avgLeftBeforeSeen: 3.2 },
+  { month: "Mar", state: "GA", avgEdWaitTime: 268, avgTransferTime: 106, avgLeftBeforeSeen: 3.4 },
+  { month: "Apr", state: "GA", avgEdWaitTime: 270, avgTransferTime: 108, avgLeftBeforeSeen: 3.5 },
+  { month: "May", state: "GA", avgEdWaitTime: 272, avgTransferTime: 109, avgLeftBeforeSeen: 3.5 },
+  { month: "Jun", state: "GA", avgEdWaitTime: 275, avgTransferTime: 110, avgLeftBeforeSeen: 3.6 },
+  { month: "Jul", state: "GA", avgEdWaitTime: 278, avgTransferTime: 112, avgLeftBeforeSeen: 3.7 },
+  { month: "Aug", state: "GA", avgEdWaitTime: 274, avgTransferTime: 110, avgLeftBeforeSeen: 3.6 },
+  { month: "Sep", state: "GA", avgEdWaitTime: 270, avgTransferTime: 108, avgLeftBeforeSeen: 3.4 },
+  { month: "Oct", state: "GA", avgEdWaitTime: 268, avgTransferTime: 106, avgLeftBeforeSeen: 3.4 },
+  { month: "Nov", state: "GA", avgEdWaitTime: 272, avgTransferTime: 108, avgLeftBeforeSeen: 3.5 },
+  { month: "Dec", state: "GA", avgEdWaitTime: 275, avgTransferTime: 110, avgLeftBeforeSeen: 3.6 },
+
+  // IL - above avg, winter heavy
+  { month: "Jan", state: "IL", avgEdWaitTime: 280, avgTransferTime: 112, avgLeftBeforeSeen: 3.5 },
+  { month: "Feb", state: "IL", avgEdWaitTime: 285, avgTransferTime: 114, avgLeftBeforeSeen: 3.6 },
+  { month: "Mar", state: "IL", avgEdWaitTime: 278, avgTransferTime: 110, avgLeftBeforeSeen: 3.4 },
+  { month: "Apr", state: "IL", avgEdWaitTime: 270, avgTransferTime: 106, avgLeftBeforeSeen: 3.2 },
+  { month: "May", state: "IL", avgEdWaitTime: 265, avgTransferTime: 104, avgLeftBeforeSeen: 3.1 },
+  { month: "Jun", state: "IL", avgEdWaitTime: 262, avgTransferTime: 102, avgLeftBeforeSeen: 3.0 },
+  { month: "Jul", state: "IL", avgEdWaitTime: 268, avgTransferTime: 105, avgLeftBeforeSeen: 3.2 },
+  { month: "Aug", state: "IL", avgEdWaitTime: 272, avgTransferTime: 108, avgLeftBeforeSeen: 3.3 },
+  { month: "Sep", state: "IL", avgEdWaitTime: 275, avgTransferTime: 110, avgLeftBeforeSeen: 3.4 },
+  { month: "Oct", state: "IL", avgEdWaitTime: 278, avgTransferTime: 112, avgLeftBeforeSeen: 3.5 },
+  { month: "Nov", state: "IL", avgEdWaitTime: 282, avgTransferTime: 113, avgLeftBeforeSeen: 3.6 },
+  { month: "Dec", state: "IL", avgEdWaitTime: 288, avgTransferTime: 115, avgLeftBeforeSeen: 3.7 },
+
+  // MA - above avg year-round
+  { month: "Jan", state: "MA", avgEdWaitTime: 278, avgTransferTime: 115, avgLeftBeforeSeen: 3.4 },
+  { month: "Feb", state: "MA", avgEdWaitTime: 282, avgTransferTime: 117, avgLeftBeforeSeen: 3.5 },
+  { month: "Mar", state: "MA", avgEdWaitTime: 275, avgTransferTime: 113, avgLeftBeforeSeen: 3.3 },
+  { month: "Apr", state: "MA", avgEdWaitTime: 268, avgTransferTime: 110, avgLeftBeforeSeen: 3.1 },
+  { month: "May", state: "MA", avgEdWaitTime: 265, avgTransferTime: 108, avgLeftBeforeSeen: 3.0 },
+  { month: "Jun", state: "MA", avgEdWaitTime: 262, avgTransferTime: 106, avgLeftBeforeSeen: 2.9 },
+  { month: "Jul", state: "MA", avgEdWaitTime: 270, avgTransferTime: 110, avgLeftBeforeSeen: 3.2 },
+  { month: "Aug", state: "MA", avgEdWaitTime: 268, avgTransferTime: 109, avgLeftBeforeSeen: 3.1 },
+  { month: "Sep", state: "MA", avgEdWaitTime: 272, avgTransferTime: 112, avgLeftBeforeSeen: 3.3 },
+  { month: "Oct", state: "MA", avgEdWaitTime: 275, avgTransferTime: 114, avgLeftBeforeSeen: 3.4 },
+  { month: "Nov", state: "MA", avgEdWaitTime: 280, avgTransferTime: 116, avgLeftBeforeSeen: 3.5 },
+  { month: "Dec", state: "MA", avgEdWaitTime: 284, avgTransferTime: 118, avgLeftBeforeSeen: 3.6 },
+
+  // NY - consistently highest
+  { month: "Jan", state: "NY", avgEdWaitTime: 310, avgTransferTime: 138, avgLeftBeforeSeen: 4.5 },
+  { month: "Feb", state: "NY", avgEdWaitTime: 315, avgTransferTime: 140, avgLeftBeforeSeen: 4.7 },
+  { month: "Mar", state: "NY", avgEdWaitTime: 308, avgTransferTime: 136, avgLeftBeforeSeen: 4.4 },
+  { month: "Apr", state: "NY", avgEdWaitTime: 298, avgTransferTime: 130, avgLeftBeforeSeen: 4.1 },
+  { month: "May", state: "NY", avgEdWaitTime: 292, avgTransferTime: 126, avgLeftBeforeSeen: 3.9 },
+  { month: "Jun", state: "NY", avgEdWaitTime: 288, avgTransferTime: 124, avgLeftBeforeSeen: 3.8 },
+  { month: "Jul", state: "NY", avgEdWaitTime: 295, avgTransferTime: 128, avgLeftBeforeSeen: 4.0 },
+  { month: "Aug", state: "NY", avgEdWaitTime: 300, avgTransferTime: 132, avgLeftBeforeSeen: 4.2 },
+  { month: "Sep", state: "NY", avgEdWaitTime: 305, avgTransferTime: 135, avgLeftBeforeSeen: 4.4 },
+  { month: "Oct", state: "NY", avgEdWaitTime: 312, avgTransferTime: 138, avgLeftBeforeSeen: 4.6 },
+  { month: "Nov", state: "NY", avgEdWaitTime: 318, avgTransferTime: 142, avgLeftBeforeSeen: 4.8 },
+  { month: "Dec", state: "NY", avgEdWaitTime: 322, avgTransferTime: 145, avgLeftBeforeSeen: 5.0 },
+
+  // OH - moderate, slight improvement
+  { month: "Jan", state: "OH", avgEdWaitTime: 252, avgTransferTime: 98, avgLeftBeforeSeen: 2.8 },
+  { month: "Feb", state: "OH", avgEdWaitTime: 250, avgTransferTime: 97, avgLeftBeforeSeen: 2.7 },
+  { month: "Mar", state: "OH", avgEdWaitTime: 248, avgTransferTime: 96, avgLeftBeforeSeen: 2.7 },
+  { month: "Apr", state: "OH", avgEdWaitTime: 245, avgTransferTime: 94, avgLeftBeforeSeen: 2.6 },
+  { month: "May", state: "OH", avgEdWaitTime: 242, avgTransferTime: 93, avgLeftBeforeSeen: 2.5 },
+  { month: "Jun", state: "OH", avgEdWaitTime: 240, avgTransferTime: 92, avgLeftBeforeSeen: 2.5 },
+  { month: "Jul", state: "OH", avgEdWaitTime: 244, avgTransferTime: 94, avgLeftBeforeSeen: 2.6 },
+  { month: "Aug", state: "OH", avgEdWaitTime: 246, avgTransferTime: 95, avgLeftBeforeSeen: 2.6 },
+  { month: "Sep", state: "OH", avgEdWaitTime: 248, avgTransferTime: 96, avgLeftBeforeSeen: 2.7 },
+  { month: "Oct", state: "OH", avgEdWaitTime: 245, avgTransferTime: 95, avgLeftBeforeSeen: 2.6 },
+  { month: "Nov", state: "OH", avgEdWaitTime: 248, avgTransferTime: 96, avgLeftBeforeSeen: 2.7 },
+  { month: "Dec", state: "OH", avgEdWaitTime: 252, avgTransferTime: 98, avgLeftBeforeSeen: 2.8 },
+
+  // PA - mid-range
+  { month: "Jan", state: "PA", avgEdWaitTime: 260, avgTransferTime: 102, avgLeftBeforeSeen: 3.0 },
+  { month: "Feb", state: "PA", avgEdWaitTime: 262, avgTransferTime: 103, avgLeftBeforeSeen: 3.1 },
+  { month: "Mar", state: "PA", avgEdWaitTime: 258, avgTransferTime: 100, avgLeftBeforeSeen: 2.9 },
+  { month: "Apr", state: "PA", avgEdWaitTime: 254, avgTransferTime: 98, avgLeftBeforeSeen: 2.8 },
+  { month: "May", state: "PA", avgEdWaitTime: 250, avgTransferTime: 96, avgLeftBeforeSeen: 2.7 },
+  { month: "Jun", state: "PA", avgEdWaitTime: 248, avgTransferTime: 95, avgLeftBeforeSeen: 2.6 },
+  { month: "Jul", state: "PA", avgEdWaitTime: 252, avgTransferTime: 97, avgLeftBeforeSeen: 2.8 },
+  { month: "Aug", state: "PA", avgEdWaitTime: 255, avgTransferTime: 99, avgLeftBeforeSeen: 2.9 },
+  { month: "Sep", state: "PA", avgEdWaitTime: 258, avgTransferTime: 101, avgLeftBeforeSeen: 3.0 },
+  { month: "Oct", state: "PA", avgEdWaitTime: 260, avgTransferTime: 102, avgLeftBeforeSeen: 3.0 },
+  { month: "Nov", state: "PA", avgEdWaitTime: 264, avgTransferTime: 104, avgLeftBeforeSeen: 3.1 },
+  { month: "Dec", state: "PA", avgEdWaitTime: 268, avgTransferTime: 106, avgLeftBeforeSeen: 3.2 },
+
+  // TX - moderate, summer heat spike
+  { month: "Jan", state: "TX", avgEdWaitTime: 248, avgTransferTime: 96, avgLeftBeforeSeen: 2.8 },
+  { month: "Feb", state: "TX", avgEdWaitTime: 245, avgTransferTime: 94, avgLeftBeforeSeen: 2.7 },
+  { month: "Mar", state: "TX", avgEdWaitTime: 250, avgTransferTime: 97, avgLeftBeforeSeen: 2.9 },
+  { month: "Apr", state: "TX", avgEdWaitTime: 252, avgTransferTime: 98, avgLeftBeforeSeen: 2.9 },
+  { month: "May", state: "TX", avgEdWaitTime: 258, avgTransferTime: 100, avgLeftBeforeSeen: 3.1 },
+  { month: "Jun", state: "TX", avgEdWaitTime: 265, avgTransferTime: 104, avgLeftBeforeSeen: 3.3 },
+  { month: "Jul", state: "TX", avgEdWaitTime: 270, avgTransferTime: 106, avgLeftBeforeSeen: 3.4 },
+  { month: "Aug", state: "TX", avgEdWaitTime: 268, avgTransferTime: 105, avgLeftBeforeSeen: 3.3 },
+  { month: "Sep", state: "TX", avgEdWaitTime: 260, avgTransferTime: 101, avgLeftBeforeSeen: 3.1 },
+  { month: "Oct", state: "TX", avgEdWaitTime: 255, avgTransferTime: 99, avgLeftBeforeSeen: 3.0 },
+  { month: "Nov", state: "TX", avgEdWaitTime: 252, avgTransferTime: 97, avgLeftBeforeSeen: 2.9 },
+  { month: "Dec", state: "TX", avgEdWaitTime: 258, avgTransferTime: 100, avgLeftBeforeSeen: 3.1 },
+];
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+export function getMonthlyStateMetrics(): MonthlyStateMetric[] {
+  return monthlyData;
+}
+
+export function getNationalAverages(): NationalAverages {
+  return nationalAverages;
+}
+
+export function getMonthOrder(): string[] {
+  return MONTHS;
+}
+
 export function getHospitalSummaries(): HospitalSummary[] {
   return rawData;
 }

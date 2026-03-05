@@ -6,6 +6,9 @@ import {
   getHospitalSummaries,
   getUniqueStates,
   getStateAggregates,
+  getMonthlyStateMetrics,
+  getNationalAverages,
+  getMonthOrder,
 } from "@/data/healthcare-dashboard";
 import { useThemeColors } from "@/hooks/useThemeColors";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -14,10 +17,14 @@ import StateFilter from "./components/StateFilter";
 import EDWaitTimeChart from "./components/EDWaitTimeChart";
 import StateComparisonChart from "./components/StateComparisonChart";
 import VolumeDistributionChart from "./components/VolumeDistributionChart";
+import MonthlyTrendChart from "./components/MonthlyTrendChart";
 import DataTable from "./components/DataTable";
 
 const allHospitals = getHospitalSummaries();
 const allStates = getUniqueStates();
+const monthlyMetrics = getMonthlyStateMetrics();
+const nationalAverages = getNationalAverages();
+const monthOrder = getMonthOrder();
 
 export default function DashboardClient() {
   const [selectedState, setSelectedState] = useState("");
@@ -72,6 +79,16 @@ export default function DashboardClient() {
       <section className="mb-8 grid gap-6 lg:grid-cols-2">
         <EDWaitTimeChart data={filtered} colors={colors} />
         <StateComparisonChart data={stateAggregates} colors={colors} />
+      </section>
+
+      <section className="mb-8">
+        <MonthlyTrendChart
+          data={monthlyMetrics}
+          nationalAverages={nationalAverages}
+          months={monthOrder}
+          selectedState={selectedState}
+          colors={colors}
+        />
       </section>
 
       <section className="mb-8">
