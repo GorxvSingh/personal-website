@@ -21,7 +21,7 @@ const greatVibes = Great_Vibes({
 export const metadata: Metadata = {
   title: "Gorav Saluja",
   description:
-    "Personal website of Gorav Saluja — projects and proof of work.",
+    "Personal website of Gorav Saluja. Projects and proof of work.",
 };
 
 export default function RootLayout({

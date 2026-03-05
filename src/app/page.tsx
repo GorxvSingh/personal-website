@@ -53,7 +53,7 @@ export default function Home() {
         <p className="max-w-lg text-lg leading-relaxed text-muted">
           I build data systems and AI-powered workflows that turn messy
           operational data into clear decisions. From automated dashboards to
-          agentic tools that cut manual work — I make complex systems easy to
+          agentic tools that cut manual work. I make complex systems easy to
           act on.
         </p>
       </section>
