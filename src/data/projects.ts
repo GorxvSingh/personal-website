@@ -7,17 +7,24 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "Project Two",
+    title: "Healthcare Operations Dashboard",
     description:
-      "Replace this with a real project. Describe what it does, what problem it solves, and the impact it had.",
-    url: "#",
-    tags: ["Next.js", "Tailwind"],
+      "An interactive dashboard tracking ED wait times, transfer times, left-before-seen rates, and CT timeliness across 55+ hospitals in 10 states. Built with real CMS data — sortable tables, filterable charts, and KPI cards give operations leaders a single pane of glass for real-time decision-making.",
+    url: "/projects/healthcare-dashboard",
+    tags: ["Next.js", "Recharts", "CMS Data", "TypeScript"],
   },
   {
-    title: "Project Three",
+    title: "Automated Invoice Reconciliation Tracker",
     description:
-      "Replace this with a real project. Describe what you built, the technologies used, and measurable outcomes.",
+      "A lightweight automation system that ingests monthly invoices, cross-references them against contract rates and historical data, and flags discrepancies for review. Eliminates hours of manual spreadsheet work and surfaces billing anomalies before they become costly errors.",
     url: "#",
-    tags: ["Python", "FastAPI"],
+    tags: ["Power Automate", "SharePoint", "Excel", "Python"],
+  },
+  {
+    title: "AI-Powered Report Generator",
+    description:
+      "An agentic tool that takes raw operational data and produces narrative summary reports with trend analysis, anomaly callouts, and actionable recommendations. Turns a multi-hour manual reporting process into a one-click workflow — letting analysts focus on strategy instead of formatting.",
+    url: "#",
+    tags: ["Python", "Claude API", "Pandas", "Automation"],
   },
 ];

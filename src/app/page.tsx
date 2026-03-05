@@ -68,9 +68,9 @@ export default function Home() {
             <a
               key={project.title}
               href={project.url ?? "#"}
-              target={project.url && project.url !== "#" ? "_blank" : undefined}
+              target={project.url?.startsWith("http") ? "_blank" : undefined}
               rel={
-                project.url && project.url !== "#"
+                project.url?.startsWith("http")
                   ? "noopener noreferrer"
                   : undefined
               }
