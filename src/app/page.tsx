@@ -1,4 +1,5 @@
 import { projects } from "@/data/projects";
+import ThemeToggle from "@/components/ThemeToggle";
 
 function ArrowIcon() {
   return (
@@ -33,13 +34,14 @@ export default function Home() {
     <div className="mx-auto max-w-2xl px-6 py-20 sm:py-32">
       {/* Header / Nav */}
       <header className="mb-20">
-        <nav>
+        <nav className="flex items-center justify-between">
           <a
             href="/"
             className="text-lg font-semibold tracking-tight text-foreground"
           >
             Gorav Saluja
           </a>
+          <ThemeToggle />
         </nav>
       </header>
 
@@ -49,8 +51,10 @@ export default function Home() {
           Hey, I&apos;m Gorav
         </h1>
         <p className="max-w-lg text-lg leading-relaxed text-muted">
-          I build products and solve problems. This is a collection of projects
-          and proof of work that show how I think and what I can do.
+          I build data systems and AI-powered workflows that turn messy
+          operational data into clear decisions. From automated dashboards to
+          agentic tools that cut manual work — I make complex systems easy to
+          act on.
         </p>
       </section>
 
@@ -70,7 +74,7 @@ export default function Home() {
                   ? "noopener noreferrer"
                   : undefined
               }
-              className="group -mx-4 flex items-start justify-between gap-4 rounded-lg px-4 py-4 transition-colors hover:bg-zinc-50"
+              className="group -mx-4 flex items-start justify-between gap-4 rounded-lg px-4 py-4 transition-colors hover:bg-hover"
             >
               <div className="min-w-0">
                 <h3 className="font-medium text-foreground">
@@ -83,7 +87,7 @@ export default function Home() {
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-600"
+                      className="rounded-full bg-tag-bg px-2.5 py-0.5 text-xs font-medium text-tag-text"
                     >
                       {tag}
                     </span>
