@@ -14,34 +14,34 @@ export default function EDWaitTimeChart({ data, colors }: EDWaitTimeChartProps) 
     .sort((a, b) => b.edWaitTime! - a.edWaitTime!)
     .slice(0, 10)
     .map((d) => ({
-      name: d.facilityName.length > 20 ? d.facilityName.substring(0, 20) + "..." : d.facilityName,
+      name: d.facilityName.length > 22 ? d.facilityName.substring(0, 22) + "..." : d.facilityName,
       fullName: d.facilityName,
       value: d.edWaitTime,
       state: d.state,
     }));
 
   return (
-    <ChartWrapper title="Top 10 Hospitals by ED Wait Time">
-      <BarChart data={chartData} margin={{ top: 5, right: 5, bottom: 60, left: 5 }}>
+    <ChartWrapper title="Top 10 Hospitals by ED Wait Time" height={400}>
+      <BarChart data={chartData} layout="vertical" margin={{ top: 5, right: 20, bottom: 5, left: 5 }}>
         <CartesianGrid strokeDasharray="3 3" stroke={colors.border} />
         <XAxis
-          dataKey="name"
-          tick={{ fill: colors.muted, fontSize: 10 }}
-          stroke={colors.border}
-          angle={-45}
-          textAnchor="end"
-          height={80}
-        />
-        <YAxis
+          type="number"
           tick={{ fill: colors.muted, fontSize: 12 }}
           stroke={colors.border}
           label={{
             value: "Minutes",
-            angle: -90,
-            position: "insideLeft",
+            position: "insideBottom",
+            offset: -2,
             fill: colors.muted,
             fontSize: 12,
           }}
+        />
+        <YAxis
+          type="category"
+          dataKey="name"
+          tick={{ fill: colors.muted, fontSize: 10 }}
+          stroke={colors.border}
+          width={150}
         />
         <Tooltip
           contentStyle={{
@@ -56,7 +56,7 @@ export default function EDWaitTimeChart({ data, colors }: EDWaitTimeChartProps) 
             payload?.[0]?.payload?.fullName ?? ""
           }
         />
-        <Bar dataKey="value" fill={colors.chartPrimary} radius={[4, 4, 0, 0]} />
+        <Bar dataKey="value" fill={colors.chartPrimary} radius={[0, 4, 4, 0]} />
       </BarChart>
     </ChartWrapper>
   );

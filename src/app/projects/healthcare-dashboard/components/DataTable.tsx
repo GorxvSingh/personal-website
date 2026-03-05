@@ -11,7 +11,7 @@ type SortKey = "facilityName" | "state" | "edWaitTime" | "transferWaitTime" | "l
 
 function SortArrow({ active, asc }: { active: boolean; asc: boolean }) {
   if (!active) return <span className="ml-1 text-muted/40">&#8597;</span>;
-  return <span className="ml-1">{asc ? "&#8593;" : "&#8595;"}</span>;
+  return <span className="ml-1">{asc ? "\u2191" : "\u2193"}</span>;
 }
 
 export default function DataTable({ data }: DataTableProps) {
