@@ -37,7 +37,7 @@ export default function Home() {
         <nav className="flex items-center justify-between">
           <a
             href="/"
-            className="text-lg font-semibold tracking-tight text-foreground"
+            className="font-[family-name:var(--font-signature)] text-2xl text-foreground"
           >
             Gorav Saluja
           </a>
@@ -100,6 +100,39 @@ export default function Home() {
             </a>
           ))}
         </div>
+      </section>
+
+      {/* Connect */}
+      <section className="mt-20">
+        <h2 className="mb-4 text-sm font-medium uppercase tracking-widest text-muted">
+          Connect with me
+        </h2>
+        <p className="mb-6 text-muted">
+          Have a question or want to work together? Reach out.
+        </p>
+        <a
+          href="mailto:goravjitsaluja@gmail.com"
+          className="group inline-flex items-center gap-2 font-medium text-foreground transition-colors"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="shrink-0"
+          >
+            <rect width="20" height="16" x="2" y="4" rx="2" />
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+          </svg>
+          goravjitsaluja@gmail.com
+          <span className="transition-transform group-hover:translate-x-1">
+            <ArrowIcon />
+          </span>
+        </a>
       </section>
 
       {/* Footer */}
